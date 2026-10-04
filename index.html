@@ -1,145 +1,4244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration form · alert & clear</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #dcf4f6;
-        }
-        .form-container {
-            width: 100%;
-            max-width: 500px;
-            background-color: #c7f4f6;
-            padding: 20px;
-            margin: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-        .form-title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        form {
-            max-width: 400px;
-            margin: auto;
-            line-height: 1.5;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-gender {
-            display: inline-block;
-            margin-right: 10px;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        input[type="reset"] {
-            background-color: #f44336;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="reset"]:hover {
-            background-color: #da190b;
-        }
-        .form-btn {
-            display: inline-block;
-            margin-right: 80px;
-        }
-        /* small touch for alignment */
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-            margin-top: 4px;
-        }
-        .btn-group .form-btn {
-            margin-right: 0;
-        }
-        /* override for inline-block if needed */
-        .form-btn {
-            display: inline-block;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>AWS Complete Practical Guide</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:300px;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    overflow-y:auto;
+    background:#111827;
+    color:white;
+    padding:18px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    padding:10px 5px 18px;
+}
+
+.logo span{
+    color:#ff9900;
+}
+
+.progress{
+    background:#1f2937;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.progressbar{
+    height:8px;
+    background:#374151;
+    border-radius:10px;
+    margin-top:8px;
+    overflow:hidden;
+}
+
+.progressfill{
+    height:100%;
+    width:0%;
+    background:#22c55e;
+}
+
+.search{
+    width:100%;
+    padding:11px;
+    border:0;
+    border-radius:7px;
+    background:#374151;
+    color:white;
+    margin-bottom:12px;
+}
+
+.topic{
+    padding:10px;
+    border-radius:7px;
+    margin-bottom:3px;
+    cursor:pointer;
+    font-size:14px;
+    color:#d1d5db;
+}
+
+.topic:hover{
+    background:#1f2937;
+}
+
+.topic.active{
+    background:#ff9900;
+    color:#111827;
+    font-weight:bold;
+}
+
+.topic.completed::after{
+    content:" ✓";
+    color:#22c55e;
+}
+
+.topic.active.completed::after{
+    color:#111827;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:300px;
+    width:calc(100% - 300px);
+}
+
+.topbar{
+    height:65px;
+    background:white;
+    border-bottom:1px solid #ddd;
+    position:sticky;
+    top:0;
+    z-index:5;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+}
+
+.topbar h2{
+    font-size:19px;
+}
+
+.darkbtn{
+    background:#111827;
+    color:white;
+    border:0;
+    border-radius:7px;
+    padding:9px 15px;
+    cursor:pointer;
+}
+
+.content{
+    max-width:1100px;
+    margin:auto;
+    padding:30px;
+}
+
+/* HERO */
+
+.hero{
+    background:linear-gradient(135deg,#172554,#1d4ed8);
+    color:white;
+    padding:35px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:31px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    line-height:1.7;
+    color:#dbeafe;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.card h2{
+    color:#172554;
+    margin-bottom:15px;
+}
+
+.card h3{
+    color:#1d4ed8;
+    margin:20px 0 10px;
+}
+
+.card p,
+.card li{
+    line-height:1.7;
+}
+
+.card ul,
+.card ol{
+    padding-left:25px;
+}
+
+.card li{
+    margin:5px 0;
+}
+
+/* STEP */
+
+.step{
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    margin:10px 0;
+    overflow:hidden;
+}
+
+.step-title{
+    background:#f8fafc;
+    padding:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.step-body{
+    padding:16px;
+    line-height:1.7;
+}
+
+.step-number{
+    display:inline-block;
+    background:#1d4ed8;
+    color:white;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    text-align:center;
+    line-height:28px;
+    margin-right:8px;
+}
+
+/* COMMAND */
+
+.command{
+    background:#111827;
+    color:#e5e7eb;
+    padding:17px;
+    border-radius:8px;
+    margin:12px 0;
+    font-family:monospace;
+    white-space:pre-wrap;
+    overflow-x:auto;
+}
+
+/* NOTE */
+
+.note{
+    background:#fff7ed;
+    border-left:5px solid #f97316;
+    padding:15px;
+    margin:15px 0;
+    border-radius:5px;
+}
+
+.success{
+    background:#f0fdf4;
+    border-left:5px solid #22c55e;
+    padding:15px;
+    margin:15px 0;
+    border-radius:5px;
+}
+
+.warning{
+    background:#fef2f2;
+    border-left:5px solid #ef4444;
+    padding:15px;
+    margin:15px 0;
+    border-radius:5px;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:15px 0;
+}
+
+th,
+td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:left;
+}
+
+th{
+    background:#eff6ff;
+}
+
+/* CHECKLIST */
+
+.checklist{
+    list-style:none!important;
+    padding:0!important;
+}
+
+.checklist li{
+    background:#f8fafc;
+    padding:10px;
+    border-radius:7px;
+    margin:7px 0;
+}
+
+.checklist input{
+    transform:scale(1.2);
+    margin-right:8px;
+}
+
+/* NAV */
+
+.navigation{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:25px;
+}
+
+.btn{
+    border:0;
+    background:#1d4ed8;
+    color:white;
+    padding:13px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#1e40af;
+}
+
+.complete{
+    background:#16a34a;
+}
+
+.complete:hover{
+    background:#15803d;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.box{
+    background:#f8fafc;
+    border-left:4px solid #3b82f6;
+    padding:16px;
+    border-radius:8px;
+}
+
+/* DARK */
+
+body.dark{
+    background:#0f172a;
+    color:#e5e7eb;
+}
+
+body.dark .topbar,
+body.dark .card{
+    background:#1e293b;
+    color:#e5e7eb;
+}
+
+body.dark .card h2{
+    color:#93c5fd;
+}
+
+body.dark .step-title,
+body.dark .box,
+body.dark .checklist li{
+    background:#273449;
+}
+
+body.dark table th{
+    background:#273449;
+}
+
+body.dark table td,
+body.dark table th{
+    border-color:#475569;
+}
+
+body.dark .note{
+    background:#422006;
+}
+
+body.dark .success{
+    background:#052e16;
+}
+
+body.dark .warning{
+    background:#450a0a;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .sidebar{
+        width:230px;
+    }
+
+    .main{
+        margin-left:230px;
+        width:calc(100% - 230px);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .app{
+        display:block;
+    }
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
-    <h1 class="form-title">Registration form</h1>
-    <div class="form-container">
 
-        <form id="registrationForm" action="#" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+<div class="app">
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+<aside class="sidebar">
 
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+<div class="logo">
+☁️ <span>AWS</span> Practical Guide
+</div>
 
-            <span class="form-gender">Gender:</span>
-            <input type="radio" id="male" name="gender" value="male" required>
-            <label class="form-gender" for="male">Male</label>
+<div class="progress">
 
-            <input type="radio" id="female" name="gender" value="female" required>
-            <label class="form-gender" for="female">Female</label>
+<div>
+Course Progress:
+<strong id="progressText">0%</strong>
+</div>
 
-            <input type="radio" id="other" name="gender" value="other" required>
-            <label class="form-gender" for="other">Other</label>
-            <br><br>
+<div class="progressbar">
+<div class="progressfill" id="progressFill"></div>
+</div>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            
-            <div class="btn-group">
-                <input class="form-btn" type="reset" value="Clear">
-                <input class="form-btn" type="submit" value="Register">
-            </div>
-        </form>
-    </div>
+</div>
 
-    <script>
-        (function() {
-            const form = document.getElementById('registrationForm');
+<input
+class="search"
+id="search"
+placeholder="Search service..."
+onkeyup="searchTopics()">
 
-            form.addEventListener('submit', function(event) {
-                
-                event.preventDefault();
-                alert('Form submitted');
-                form.reset();
+<div id="topics"></div>
 
-            });
+</aside>
 
-        })();
-    </script>
+
+<main class="main">
+
+<div class="topbar">
+
+<h2 id="pageTitle">AWS Complete Practical Guide</h2>
+
+<button class="darkbtn" onclick="darkMode()">
+🌙 Dark Mode
+</button>
+
+</div>
+
+<div class="content" id="content"></div>
+
+</main>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+AWS COURSE
+========================================================= */
+
+const data=[
+
+/* INTRO */
+
+{
+id:"intro",
+title:"01. AWS Roadmap",
+
+html:`
+
+<div class="hero">
+
+<h1>AWS Complete Practical Roadmap</h1>
+
+<p>
+Learn AWS by creating real services instead of only watching
+videos or reading theory.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Learning Order</h2>
+
+<div class="grid">
+
+<div class="box">1. IAM</div>
+<div class="box">2. AWS CLI</div>
+<div class="box">3. EC2</div>
+<div class="box">4. EBS</div>
+<div class="box">5. AMI</div>
+<div class="box">6. ELB</div>
+<div class="box">7. Auto Scaling</div>
+<div class="box">8. S3</div>
+<div class="box">9. RDS</div>
+<div class="box">10. DynamoDB</div>
+<div class="box">11. Lambda</div>
+<div class="box">12. CloudFormation</div>
+<div class="box">13. Route 53</div>
+<div class="box">14. CloudFront</div>
+<div class="box">15. VPC</div>
+<div class="box">16. Billing</div>
+<div class="box">17. Amplify</div>
+<div class="box">18. ECS</div>
+<div class="box">19. EKS</div>
+<div class="box">20. Terraform</div>
+<div class="box">21. DNS</div>
+<div class="box">22. SSL/TLS</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Before Starting</h2>
+
+<ul class="checklist">
+
+<li>
+<label>
+<input type="checkbox">
+Basic Linux knowledge
+</label>
+</li>
+
+<li>
+<label>
+<input type="checkbox">
+Basic networking
+</label>
+</li>
+
+<li>
+<label>
+<input type="checkbox">
+Basic SQL
+</label>
+</li>
+
+<li>
+<label>
+<input type="checkbox">
+Basic Git/GitHub
+</label>
+</li>
+
+</ul>
+
+</div>
+
+<div class="warning">
+
+AWS is a paid cloud platform. Always monitor your resources and
+terminate resources you are no longer using.
+
+</div>
+
+`
+},
+
+/* IAM */
+
+{
+id:"iam",
+title:"02. IAM - Identity & Access Management",
+
+html:`
+
+<div class="hero">
+
+<h1>IAM</h1>
+
+<p>
+Manage users, permissions, policies and roles.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>What You Will Create</h2>
+
+<ul>
+<li>IAM User</li>
+<li>IAM Group</li>
+<li>IAM Policy</li>
+<li>IAM Role</li>
+<li>MFA</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Create IAM User</h2>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">1</span>
+Open IAM
+</div>
+
+<div class="step-body">
+
+AWS Console → Search <b>IAM</b> → Open IAM.
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">2</span>
+Create User
+</div>
+
+<div class="step-body">
+
+IAM → Users → Create user.
+
+Enter a username.
+
+Example:
+
+<div class="command">developer</div>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">3</span>
+Permissions
+</div>
+
+<div class="step-body">
+
+For learning you can attach a suitable managed policy.
+
+For production always follow least privilege.
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">4</span>
+Enable MFA
+</div>
+
+<div class="step-body">
+
+User → Security credentials → Multi-factor authentication.
+
+Configure an authenticator application.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Create IAM Role</h2>
+
+<ol>
+
+<li>IAM → Roles.</li>
+
+<li>Click Create role.</li>
+
+<li>Select trusted entity.</li>
+
+<li>Select required permissions.</li>
+
+<li>Give role a name.</li>
+
+<li>Create role.</li>
+
+</ol>
+
+<h3>Example</h3>
+
+<p>
+An EC2 server can use an IAM role to access S3 without storing
+access keys inside the server.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Important Rule</h2>
+
+<div class="warning">
+
+Never put AWS secret access keys directly inside Java,
+React, Python or other application source code.
+
+</div>
+
+</div>
+
+`
+},
+
+/* CLI */
+
+{
+id:"cli",
+title:"03. AWS CLI",
+
+html:`
+
+<div class="hero">
+
+<h1>AWS CLI</h1>
+
+<p>
+Control AWS from Linux/macOS/Windows terminal.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Install AWS CLI</h2>
+
+<p>
+Install the AWS CLI appropriate for your operating system from
+the official AWS installer/documentation.
+</p>
+
+<h3>Check</h3>
+
+<div class="command">
+aws --version
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Configure</h2>
+
+<div class="command">
+aws configure
+</div>
+
+<p>Enter:</p>
+
+<ul>
+<li>Access Key ID</li>
+<li>Secret Access Key</li>
+<li>Default region</li>
+<li>Output format</li>
+</ul>
+
+<h3>Example region</h3>
+
+<div class="command">
+ap-south-1
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Test CLI</h2>
+
+<div class="command">
+aws sts get-caller-identity
+</div>
+
+<p>
+If your identity information appears, your CLI credentials are
+working.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Useful Commands</h2>
+
+<div class="command">
+aws s3 ls
+
+aws ec2 describe-instances
+
+aws iam list-users
+
+aws rds describe-db-instances
+
+aws dynamodb list-tables
+</div>
+
+</div>
+
+`
+},
+
+/* EC2 */
+
+{
+id:"ec2",
+title:"04. EC2 - Create Server",
+
+html:`
+
+<div class="hero">
+
+<h1>EC2</h1>
+
+<p>
+Create your first AWS virtual server.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>What You Need</h2>
+
+<ul>
+<li>AMI</li>
+<li>Instance type</li>
+<li>Key pair</li>
+<li>VPC</li>
+<li>Subnet</li>
+<li>Security group</li>
+<li>EBS storage</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Step 1 — Open EC2</h2>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">1</span>
+Open EC2
+</div>
+
+<div class="step-body">
+
+AWS Console → Search <b>EC2</b> → Open EC2.
+
+Make sure you select the AWS Region you intend to use.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 2 — Launch Instance</h2>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">2</span>
+Click Launch Instance
+</div>
+
+<div class="step-body">
+
+EC2 Dashboard → Instances → Launch instance.
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">3</span>
+Name
+</div>
+
+<div class="step-body">
+
+Example:
+
+<div class="command">
+my-java-server
+</div>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">4</span>
+Select AMI
+</div>
+
+<div class="step-body">
+
+For learning you can select Amazon Linux or Ubuntu.
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">5</span>
+Instance Type
+</div>
+
+<div class="step-body">
+
+Select a suitable instance type for your workload.
+
+For learning, choose a small eligible instance type available
+under your account/region and review current pricing/free-tier
+eligibility before launching.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 3 — Create Key Pair</h2>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">1</span>
+Create key pair
+</div>
+
+<div class="step-body">
+
+EC2 → Key pairs → Create key pair.
+
+Example:
+
+<div class="command">
+my-ec2-key
+</div>
+
+Download the private key and store it securely.
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+<span class="step-number">2</span>
+Linux/macOS permissions
+</div>
+
+<div class="step-body">
+
+<div class="command">
+chmod 400 my-ec2-key.pem
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 4 — Security Group</h2>
+
+<p>
+Create or select a security group.
+</p>
+
+<table>
+
+<tr>
+<th>Protocol</th>
+<th>Port</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>SSH</td>
+<td>22</td>
+<td>Linux administration</td>
+</tr>
+
+<tr>
+<td>HTTP</td>
+<td>80</td>
+<td>Web application</td>
+</tr>
+
+<tr>
+<td>HTTPS</td>
+<td>443</td>
+<td>Secure web application</td>
+</tr>
+
+<tr>
+<td>Custom</td>
+<td>8080</td>
+<td>Example Java/Tomcat port</td>
+</tr>
+
+</table>
+
+<div class="warning">
+
+Do not expose administrative ports such as SSH to the entire
+internet in production. Restrict source IPs where possible.
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 5 — Launch</h2>
+
+<ol>
+
+<li>Review settings.</li>
+
+<li>Click Launch instance.</li>
+
+<li>Wait until instance state is Running.</li>
+
+<li>Wait for status checks to pass.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Step 6 — Connect</h2>
+
+<h3>Amazon Linux</h3>
+
+<div class="command">
+ssh -i my-ec2-key.pem ec2-user@PUBLIC_IP
+</div>
+
+<h3>Ubuntu</h3>
+
+<div class="command">
+ssh -i my-ec2-key.pem ubuntu@PUBLIC_IP
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 7 — Install Java</h2>
+
+<p>Amazon Linux example:</p>
+
+<div class="command">
+sudo dnf update -y
+sudo dnf install java-17-amazon-corretto -y
+java -version
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 8 — Install Git</h2>
+
+<div class="command">
+sudo dnf install git -y
+
+git --version
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 9 — Install Maven</h2>
+
+<div class="command">
+sudo dnf install maven -y
+
+mvn -version
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>EC2 Checklist</h2>
+
+<ul class="checklist">
+
+<li><label><input type="checkbox"> Create EC2</label></li>
+<li><label><input type="checkbox"> Create key pair</label></li>
+<li><label><input type="checkbox"> Configure security group</label></li>
+<li><label><input type="checkbox"> Connect using SSH</label></li>
+<li><label><input type="checkbox"> Install Java</label></li>
+<li><label><input type="checkbox"> Install Git</label></li>
+<li><label><input type="checkbox"> Install Maven</label></li>
+
+</ul>
+
+</div>
+
+`
+},
+
+/* EBS */
+
+{
+id:"ebs",
+title:"05. EBS - Storage",
+
+html:`
+
+<div class="hero">
+
+<h1>EBS</h1>
+
+<p>
+Persistent block storage for EC2.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Create EBS Volume</h2>
+
+<ol>
+
+<li>EC2 Console.</li>
+
+<li>Elastic Block Store.</li>
+
+<li>Volumes.</li>
+
+<li>Create volume.</li>
+
+<li>Select Availability Zone matching your EC2.</li>
+
+<li>Select size.</li>
+
+<li>Select volume type.</li>
+
+<li>Create volume.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Attach Volume</h2>
+
+<ol>
+
+<li>Select volume.</li>
+
+<li>Actions.</li>
+
+<li>Attach volume.</li>
+
+<li>Select EC2 instance.</li>
+
+<li>Attach.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Linux Configuration</h2>
+
+<h3>Find Disk</h3>
+
+<div class="command">
+lsblk
+</div>
+
+<h3>Format</h3>
+
+<div class="command">
+sudo mkfs -t xfs /dev/xvdf
+</div>
+
+<h3>Create Directory</h3>
+
+<div class="command">
+sudo mkdir /data
+</div>
+
+<h3>Mount</h3>
+
+<div class="command">
+sudo mount /dev/xvdf /data
+</div>
+
+<h3>Check</h3>
+
+<div class="command">
+df -h
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Create Snapshot</h2>
+
+<ol>
+
+<li>EC2 → Volumes.</li>
+
+<li>Select volume.</li>
+
+<li>Actions.</li>
+
+<li>Create snapshot.</li>
+
+<li>Enter description.</li>
+
+<li>Create snapshot.</li>
+
+</ol>
+
+</div>
+
+<div class="note">
+
+EBS volume and EC2 instance generally need to be in the same
+Availability Zone for direct attachment.
+
+</div>
+
+`
+},
+
+/* AMI */
+
+{
+id:"ami",
+title:"06. AMI - Server Image",
+
+html:`
+
+<div class="hero">
+
+<h1>AMI</h1>
+
+<p>
+Create a reusable image of an EC2 server.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Why Create an AMI?</h2>
+
+<p>
+
+Suppose you install:
+
+</p>
+
+<ul>
+<li>Java</li>
+<li>Maven</li>
+<li>Tomcat</li>
+<li>Your application</li>
+<li>Configuration</li>
+</ul>
+
+<p>
+
+You can create an AMI and launch another server from that image.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Create AMI</h2>
+
+<ol>
+
+<li>EC2 → Instances.</li>
+
+<li>Select instance.</li>
+
+<li>Actions.</li>
+
+<li>Image and templates.</li>
+
+<li>Create image.</li>
+
+<li>Enter image name.</li>
+
+<li>Create image.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Launch From AMI</h2>
+
+<ol>
+
+<li>EC2 → AMIs.</li>
+
+<li>Select your AMI.</li>
+
+<li>Launch instance from AMI.</li>
+
+<li>Select instance type.</li>
+
+<li>Select key pair.</li>
+
+<li>Configure security group.</li>
+
+<li>Launch.</li>
+
+</ol>
+
+</div>
+
+`
+},
+
+/* ELB */
+
+{
+id:"elb",
+title:"07. Load Balancer",
+
+html:`
+
+<div class="hero">
+
+<h1>Application Load Balancer</h1>
+
+<p>
+Distribute HTTP/HTTPS traffic across servers.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Architecture</h2>
+
+<div class="command">
+Internet
+   ↓
+Application Load Balancer
+   ↓
+Target Group
+   ↓
+EC2
+EC2
+EC2
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 1 — Create Target Group</h2>
+
+<ol>
+
+<li>EC2 → Target Groups.</li>
+
+<li>Create target group.</li>
+
+<li>Target type → Instances.</li>
+
+<li>Protocol → HTTP.</li>
+
+<li>Port → 80 or your application port.</li>
+
+<li>Select VPC.</li>
+
+<li>Configure health check.</li>
+
+<li>Register EC2 instances.</li>
+
+<li>Create target group.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Step 2 — Create Load Balancer</h2>
+
+<ol>
+
+<li>EC2 → Load Balancers.</li>
+
+<li>Create Load Balancer.</li>
+
+<li>Select Application Load Balancer.</li>
+
+<li>Internet-facing.</li>
+
+<li>Select VPC.</li>
+
+<li>Select at least the required subnets.</li>
+
+<li>Configure security group.</li>
+
+<li>Create listener.</li>
+
+<li>Forward traffic to target group.</li>
+
+<li>Create load balancer.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Step 3 — Test</h2>
+
+<p>
+
+Copy the Load Balancer DNS name and open it in your browser.
+
+</p>
+
+<div class="command">
+http://LOAD-BALANCER-DNS
+</div>
+
+</div>
+
+`
+},
+
+/* ASG */
+
+{
+id:"asg",
+title:"08. Auto Scaling Group",
+
+html:`
+
+<div class="hero">
+
+<h1>Auto Scaling</h1>
+
+<p>
+Automatically maintain the required number of EC2 servers.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Before Creating ASG</h2>
+
+<p>You should have:</p>
+
+<ul>
+
+<li>Launch Template</li>
+<li>AMI</li>
+<li>Security Group</li>
+<li>VPC</li>
+<li>Target Group</li>
+<li>Load Balancer</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Create Launch Template</h2>
+
+<ol>
+
+<li>EC2 → Launch Templates.</li>
+
+<li>Create launch template.</li>
+
+<li>Select AMI.</li>
+
+<li>Select instance type.</li>
+
+<li>Select key pair if required.</li>
+
+<li>Select security group.</li>
+
+<li>Configure storage.</li>
+
+<li>Create template.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Create Auto Scaling Group</h2>
+
+<ol>
+
+<li>EC2 → Auto Scaling Groups.</li>
+
+<li>Create Auto Scaling Group.</li>
+
+<li>Select Launch Template.</li>
+
+<li>Select VPC.</li>
+
+<li>Select subnets.</li>
+
+<li>Attach existing load balancer target group.</li>
+
+<li>Configure health checks.</li>
+
+<li>Set desired capacity.</li>
+
+<li>Set minimum capacity.</li>
+
+<li>Set maximum capacity.</li>
+
+<li>Create ASG.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Example</h2>
+
+<table>
+
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+
+<tr>
+<td>Minimum</td>
+<td>2</td>
+</tr>
+
+<tr>
+<td>Desired</td>
+<td>2</td>
+</tr>
+
+<tr>
+<td>Maximum</td>
+<td>5</td>
+</tr>
+
+</table>
+
+</div>
+
+`
+},
+
+/* S3 */
+
+{
+id:"s3",
+title:"09. S3 - Object Storage",
+
+html:`
+
+<div class="hero">
+
+<h1>S3</h1>
+
+<p>
+Store images, videos, documents, backups and static files.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Create Bucket</h2>
+
+<ol>
+
+<li>Open S3.</li>
+
+<li>Click Create bucket.</li>
+
+<li>Enter globally unique bucket name.</li>
+
+<li>Select AWS Region.</li>
+
+<li>Keep Block Public Access enabled unless public access is specifically required.</li>
+
+<li>Configure versioning if required.</li>
+
+<li>Configure encryption.</li>
+
+<li>Create bucket.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Upload File</h2>
+
+<ol>
+
+<li>Open bucket.</li>
+
+<li>Click Upload.</li>
+
+<li>Add files.</li>
+
+<li>Upload.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>AWS CLI</h2>
+
+<div class="command">
+aws s3 ls
+
+aws s3 cp test.txt s3://YOUR-BUCKET/
+
+aws s3 cp s3://YOUR-BUCKET/test.txt .
+
+aws s3 sync ./website s3://YOUR-BUCKET/
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Important S3 Features</h2>
+
+<ul>
+
+<li>Versioning</li>
+<li>Lifecycle rules</li>
+<li>Encryption</li>
+<li>Bucket policies</li>
+<li>IAM policies</li>
+<li>Storage classes</li>
+<li>Object Lock</li>
+
+</ul>
+
+</div>
+
+`
+},
+
+/* RDS */
+
+{
+id:"rds",
+title:"10. RDS - MySQL Database",
+
+html:`
+
+<div class="hero">
+
+<h1>RDS</h1>
+
+<p>
+Create a managed MySQL database.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Step 1 — Open RDS</h2>
+
+<p>
+AWS Console → Search <b>RDS</b> → Create database.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Step 2 — Database Engine</h2>
+
+<ol>
+
+<li>Select Standard create.</li>
+
+<li>Engine → MySQL.</li>
+
+<li>Select a supported version.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Step 3 — Credentials</h2>
+
+<p>Example:</p>
+
+<div class="command">
+Username:
+admin
+
+Password:
+YOUR-STRONG-PASSWORD
+</div>
+
+<div class="warning">
+
+Never put your actual database password inside source code,
+GitHub or screenshots.
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 4 — Instance Configuration</h2>
+
+<p>
+
+For learning, select an appropriately sized development instance
+and verify current pricing.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Step 5 — Storage</h2>
+
+<ul>
+
+<li>Choose storage type.</li>
+<li>Set allocated storage.</li>
+<li>Enable storage autoscaling if appropriate.</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Step 6 — Connectivity</h2>
+
+<ol>
+
+<li>Select VPC.</li>
+
+<li>Select DB subnet group.</li>
+
+<li>Choose whether public access is required.</li>
+
+<li>Select/create security group.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Step 7 — Create</h2>
+
+<ol>
+
+<li>Review settings.</li>
+
+<li>Click Create database.</li>
+
+<li>Wait until status becomes Available.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Step 8 — Get Endpoint</h2>
+
+<p>
+
+RDS → Databases → Your database → Connectivity & security.
+
+Copy the endpoint.
+
+</p>
+
+<div class="command">
+DATABASE_ENDPOINT
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 9 — Connect From EC2</h2>
+
+<p>
+
+Install MySQL client on your EC2 server if needed.
+
+</p>
+
+<div class="command">
+sudo dnf install mariadb105 -y
+</div>
+
+<p>Then:</p>
+
+<div class="command">
+mysql -h DATABASE_ENDPOINT -u admin -p
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Security Group</h2>
+
+<p>
+
+The RDS security group should allow MySQL traffic from the
+application server's security group rather than from the entire
+internet whenever possible.
+
+</p>
+
+<div class="command">
+MySQL
+Port: 3306
+Source: EC2 Security Group
+</div>
+
+</div>
+
+<div class="success">
+
+Recommended production pattern:
+
+Internet → Load Balancer → EC2 → RDS
+
+Do not expose your database directly to the public internet
+unless there is a specific architectural reason.
+
+</div>
+
+`
+},
+
+/* DYNAMODB */
+
+{
+id:"dynamodb",
+title:"11. DynamoDB",
+
+html:`
+
+<div class="hero">
+
+<h1>DynamoDB</h1>
+
+<p>
+Managed NoSQL database.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Create Table</h2>
+
+<ol>
+
+<li>Open DynamoDB.</li>
+
+<li>Tables.</li>
+
+<li>Create table.</li>
+
+<li>Enter table name.</li>
+
+<li>Define partition key.</li>
+
+<li>Choose appropriate capacity settings.</li>
+
+<li>Create table.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Example</h2>
+
+<div class="command">
+Table:
+Users
+
+Partition Key:
+userId
+</div>
+
+<p>
+
+Each item can contain attributes such as:
+
+</p>
+
+<div class="command">
+userId
+name
+email
+phone
+createdAt
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>When To Use</h2>
+
+<ul>
+
+<li>High scale applications</li>
+<li>Key-value data</li>
+<li>Low latency workloads</li>
+<li>Serverless systems</li>
+
+</ul>
+
+</div>
+
+`
+},
+
+/* LAMBDA */
+
+{
+id:"lambda",
+title:"12. Lambda",
+
+html:`
+
+<div class="hero">
+
+<h1>AWS Lambda</h1>
+
+<p>
+Run code without managing servers.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Create Lambda</h2>
+
+<ol>
+
+<li>Open Lambda.</li>
+
+<li>Functions.</li>
+
+<li>Create function.</li>
+
+<li>Select Author from scratch.</li>
+
+<li>Enter function name.</li>
+
+<li>Select runtime.</li>
+
+<li>Create function.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Simple Python Example</h2>
+
+<div class="command">
+def lambda_handler(event, context):
+
+    return {
+        "statusCode": 200,
+        "body": "Hello AWS Lambda"
+    }
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Test Function</h2>
+
+<ol>
+
+<li>Open Lambda function.</li>
+
+<li>Click Test.</li>
+
+<li>Create test event.</li>
+
+<li>Run test.</li>
+
+<li>Check response.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Add Trigger</h2>
+
+<p>
+
+Examples:
+
+</p>
+
+<ul>
+
+<li>API Gateway</li>
+<li>S3</li>
+<li>EventBridge</li>
+<li>SQS</li>
+<li>DynamoDB</li>
+
+</ul>
+
+</div>
+
+`
+},
+
+/* CLOUDFORMATION */
+
+{
+id:"cloudformation",
+title:"13. CloudFormation",
+
+html:`
+
+<div class="hero">
+
+<h1>CloudFormation</h1>
+
+<p>
+Create AWS infrastructure using templates.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Example Template</h2>
+
+<div class="command">
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+
+  MyBucket:
+    Type: AWS::S3::Bucket
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Create Stack</h2>
+
+<ol>
+
+<li>Open CloudFormation.</li>
+
+<li>Stacks.</li>
+
+<li>Create stack.</li>
+
+<li>Choose existing template.</li>
+
+<li>Upload template.</li>
+
+<li>Enter stack name.</li>
+
+<li>Review.</li>
+
+<li>Create stack.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Stack Lifecycle</h2>
+
+<div class="command">
+Template
+   ↓
+CloudFormation Stack
+   ↓
+AWS Resources
+   ↓
+Update
+   ↓
+Delete
+</div>
+
+</div>
+
+`
+},
+
+/* ROUTE53 */
+
+{
+id:"route53",
+title:"14. Route 53",
+
+html:`
+
+<div class="hero">
+
+<h1>Route 53</h1>
+
+<p>
+Manage domains and DNS records.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Register Domain</h2>
+
+<p>
+
+Route 53 → Registered domains → Register domain.
+
+Availability and supported domain extensions depend on AWS's
+current offering.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Create Hosted Zone</h2>
+
+<ol>
+
+<li>Route 53.</li>
+
+<li>Hosted zones.</li>
+
+<li>Create hosted zone.</li>
+
+<li>Enter domain.</li>
+
+<li>Choose Public hosted zone for a public internet domain.</li>
+
+<li>Create hosted zone.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Create DNS Record</h2>
+
+<ol>
+
+<li>Open hosted zone.</li>
+
+<li>Create record.</li>
+
+<li>Enter record name.</li>
+
+<li>Select record type.</li>
+
+<li>Enter destination/value.</li>
+
+<li>Create record.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Common Records</h2>
+
+<table>
+
+<tr>
+<th>Record</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>A</td>
+<td>Domain → IPv4 address</td>
+</tr>
+
+<tr>
+<td>AAAA</td>
+<td>Domain → IPv6 address</td>
+</tr>
+
+<tr>
+<td>CNAME</td>
+<td>Alias to another domain name</td>
+</tr>
+
+<tr>
+<td>MX</td>
+<td>Email routing</td>
+</tr>
+
+<tr>
+<td>TXT</td>
+<td>Text/verification information</td>
+</tr>
+
+</table>
+
+</div>
+
+`
+},
+
+/* CLOUDFRONT */
+
+{
+id:"cloudfront",
+title:"15. CloudFront",
+
+html:`
+
+<div class="hero">
+
+<h1>CloudFront CDN</h1>
+
+<p>
+Deliver content from locations closer to users.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Create Distribution</h2>
+
+<ol>
+
+<li>Open CloudFront.</li>
+
+<li>Create distribution.</li>
+
+<li>Select origin type.</li>
+
+<li>Enter origin domain.</li>
+
+<li>Configure viewer protocol policy.</li>
+
+<li>Configure cache settings.</li>
+
+<li>Configure security settings.</li>
+
+<li>Create distribution.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Common Origins</h2>
+
+<ul>
+
+<li>S3</li>
+<li>Application Load Balancer</li>
+<li>EC2</li>
+<li>Custom HTTP server</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Typical Architecture</h2>
+
+<div class="command">
+User
+ ↓
+CloudFront
+ ↓
+S3 / Load Balancer
+ ↓
+Application
+</div>
+
+</div>
+
+`
+},
+
+/* VPC */
+
+{
+id:"vpc",
+title:"16. VPC - Create Network",
+
+html:`
+
+<div class="hero">
+
+<h1>VPC</h1>
+
+<p>
+Build your private AWS network.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Components</h2>
+
+<ul>
+
+<li>VPC</li>
+<li>Subnets</li>
+<li>Route Tables</li>
+<li>Internet Gateway</li>
+<li>NAT Gateway</li>
+<li>Security Groups</li>
+<li>Network ACL</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Create VPC</h2>
+
+<ol>
+
+<li>Open VPC.</li>
+
+<li>Your VPCs.</li>
+
+<li>Create VPC.</li>
+
+<li>IPv4 CIDR example:</li>
+
+</ol>
+
+<div class="command">
+10.0.0.0/16
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Create Public Subnet</h2>
+
+<div class="command">
+10.0.1.0/24
+</div>
+
+<ol>
+
+<li>Select VPC.</li>
+
+<li>Create subnet.</li>
+
+<li>Select Availability Zone.</li>
+
+<li>Enter CIDR.</li>
+
+<li>Create.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Create Private Subnet</h2>
+
+<div class="command">
+10.0.2.0/24
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Create Internet Gateway</h2>
+
+<ol>
+
+<li>Internet Gateways.</li>
+
+<li>Create internet gateway.</li>
+
+<li>Select gateway.</li>
+
+<li>Actions → Attach to VPC.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Route Table</h2>
+
+<p>
+
+For a public subnet, configure a route such as:
+
+</p>
+
+<div class="command">
+0.0.0.0/0
+      ↓
+Internet Gateway
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Typical Architecture</h2>
+
+<div class="command">
+VPC
+│
+├── Public Subnet
+│     └── Load Balancer
+│
+├── Private Subnet
+│     └── EC2
+│
+└── Private Subnet
+      └── RDS
+</div>
+
+</div>
+
+`
+},
+
+/* BILLING */
+
+{
+id:"billing",
+title:"17. Billing & Cost Control",
+
+html:`
+
+<div class="hero">
+
+<h1>AWS Billing</h1>
+
+<p>
+Learn how to prevent unexpected AWS costs.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Check Costs</h2>
+
+<ol>
+
+<li>Open AWS Billing.</li>
+
+<li>Open Cost Explorer.</li>
+
+<li>Select date range.</li>
+
+<li>Group by service.</li>
+
+<li>Review highest-cost services.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Create Budget</h2>
+
+<ol>
+
+<li>Billing → Budgets.</li>
+
+<li>Create budget.</li>
+
+<li>Select cost budget.</li>
+
+<li>Set amount.</li>
+
+<li>Add email notification.</li>
+
+<li>Create budget.</li>
+
+</ol>
+
+</div>
+
+<div class="warning">
+
+Common resources to check when you are finished practicing:
+
+<ul>
+
+<li>EC2 instances</li>
+<li>EBS volumes</li>
+<li>Snapshots</li>
+<li>Elastic IPs</li>
+<li>RDS</li>
+<li>NAT Gateway</li>
+<li>Load Balancers</li>
+<li>CloudFront</li>
+
+</ul>
+
+</div>
+
+`
+},
+
+/* ORGANIZATIONS */
+
+{
+id:"organizations",
+title:"18. AWS Organizations",
+
+html:`
+
+<div class="hero">
+
+<h1>AWS Organizations</h1>
+
+<p>
+Manage multiple AWS accounts centrally.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Example</h2>
+
+<div class="command">
+AWS Organization
+
+       │
+
+ ┌─────┼─────┐
+
+ ▼     ▼     ▼
+
+Dev   Test   Production
+Account Account Account
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Create Organization</h2>
+
+<ol>
+
+<li>Open AWS Organizations.</li>
+
+<li>Create organization.</li>
+
+<li>Select desired organization mode.</li>
+
+<li>Add member accounts as needed.</li>
+
+<li>Organize accounts using organizational units.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Learn</h2>
+
+<ul>
+
+<li>Management account</li>
+<li>Member accounts</li>
+<li>Organizational Units</li>
+<li>Service Control Policies</li>
+<li>Consolidated billing</li>
+
+</ul>
+
+</div>
+
+`
+},
+
+/* AMPLIFY */
+
+{
+id:"amplify",
+title:"19. AWS Amplify",
+
+html:`
+
+<div class="hero">
+
+<h1>AWS Amplify</h1>
+
+<p>
+Build and host modern web applications.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Deploy Web Application</h2>
+
+<ol>
+
+<li>Open Amplify.</li>
+
+<li>Create new app.</li>
+
+<li>Connect Git provider.</li>
+
+<li>Select repository.</li>
+
+<li>Select branch.</li>
+
+<li>Review build settings.</li>
+
+<li>Deploy.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Typical Flow</h2>
+
+<div class="command">
+GitHub
+ ↓
+Amplify
+ ↓
+Build
+ ↓
+Deploy
+ ↓
+HTTPS Website
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Learn</h2>
+
+<ul>
+
+<li>Hosting</li>
+<li>Environment variables</li>
+<li>Build settings</li>
+<li>Authentication</li>
+<li>APIs</li>
+<li>Storage</li>
+
+</ul>
+
+</div>
+
+`
+},
+
+/* ECS */
+
+{
+id:"ecs",
+title:"20. ECS - Docker Containers",
+
+html:`
+
+<div class="hero">
+
+<h1>Amazon ECS</h1>
+
+<p>
+Run Docker containers using AWS.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Before ECS</h2>
+
+<p>Learn Docker basics:</p>
+
+<div class="command">
+docker --version
+
+docker build -t myapp .
+
+docker run -p 8080:8080 myapp
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Push Image to ECR</h2>
+
+<ol>
+
+<li>Open ECR.</li>
+
+<li>Create repository.</li>
+
+<li>Authenticate Docker.</li>
+
+<li>Build image.</li>
+
+<li>Tag image.</li>
+
+<li>Push image.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Create ECS Cluster</h2>
+
+<ol>
+
+<li>Open ECS.</li>
+
+<li>Clusters.</li>
+
+<li>Create cluster.</li>
+
+<li>Select infrastructure option.</li>
+
+<li>Enter cluster name.</li>
+
+<li>Create.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Create Task Definition</h2>
+
+<ol>
+
+<li>Create task definition.</li>
+
+<li>Select compute option.</li>
+
+<li>Configure CPU and memory.</li>
+
+<li>Configure container.</li>
+
+<li>Enter ECR image.</li>
+
+<li>Configure port mapping.</li>
+
+<li>Create task definition.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>Create Service</h2>
+
+<ol>
+
+<li>Open cluster.</li>
+
+<li>Create service.</li>
+
+<li>Select task definition.</li>
+
+<li>Select desired number of tasks.</li>
+
+<li>Configure networking.</li>
+
+<li>Configure load balancer if required.</li>
+
+<li>Create service.</li>
+
+</ol>
+
+</div>
+
+`
+},
+
+/* EKS */
+
+{
+id:"eks",
+title:"21. EKS - Kubernetes",
+
+html:`
+
+<div class="hero">
+
+<h1>Amazon EKS</h1>
+
+<p>
+Managed Kubernetes service.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Learn Before EKS</h2>
+
+<ul>
+
+<li>Docker</li>
+<li>Kubernetes Pods</li>
+<li>Deployments</li>
+<li>Services</li>
+<li>Namespaces</li>
+<li>ConfigMaps</li>
+<li>Secrets</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Create EKS Cluster</h2>
+
+<ol>
+
+<li>Open EKS.</li>
+
+<li>Clusters.</li>
+
+<li>Add cluster.</li>
+
+<li>Select create.</li>
+
+<li>Enter cluster name.</li>
+
+<li>Select Kubernetes version.</li>
+
+<li>Configure IAM role.</li>
+
+<li>Configure VPC.</li>
+
+<li>Create cluster.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>kubectl</h2>
+
+<div class="command">
+kubectl get nodes
+
+kubectl get pods
+
+kubectl get services
+
+kubectl get deployments
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Deploy Application</h2>
+
+<div class="command">
+kubectl apply -f deployment.yaml
+
+kubectl get pods
+
+kubectl get services
+</div>
+
+</div>
+
+`
+},
+
+/* TERRAFORM */
+
+{
+id:"terraform",
+title:"22. Terraform",
+
+html:`
+
+<div class="hero">
+
+<h1>Terraform</h1>
+
+<p>
+Infrastructure as Code for AWS.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Install Terraform</h2>
+
+<p>
+
+Install Terraform using the official HashiCorp installation
+method for your operating system.
+
+</p>
+
+<h3>Check</h3>
+
+<div class="command">
+terraform version
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Create Project</h2>
+
+<div class="command">
+mkdir aws-terraform
+
+cd aws-terraform
+
+touch main.tf
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Basic Terraform Structure</h2>
+
+<div class="command">
+provider "aws" {
+  region = "ap-south-1"
+}
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Terraform Workflow</h2>
+
+<div class="command">
+terraform init
+
+terraform fmt
+
+terraform validate
+
+terraform plan
+
+terraform apply
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Delete Resources</h2>
+
+<div class="command">
+terraform destroy
+</div>
+
+<div class="warning">
+
+Always review the plan carefully before destroying infrastructure.
+
+</div>
+
+</div>
+
+`
+},
+
+/* DNS */
+
+{
+id:"dns",
+title:"23. DNS Practical",
+
+html:`
+
+<div class="hero">
+
+<h1>DNS</h1>
+
+<p>
+Understand how domain names reach your application.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>DNS Flow</h2>
+
+<div class="command">
+User enters:
+
+www.example.com
+
+        ↓
+
+DNS Resolver
+
+        ↓
+
+Route 53
+
+        ↓
+
+IP / Load Balancer
+
+        ↓
+
+Application
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Test DNS</h2>
+
+<div class="command">
+nslookup example.com
+
+dig example.com
+
+ping example.com
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Records to Learn</h2>
+
+<table>
+
+<tr>
+<th>Record</th>
+<th>Use</th>
+</tr>
+
+<tr>
+<td>A</td>
+<td>IPv4</td>
+</tr>
+
+<tr>
+<td>AAAA</td>
+<td>IPv6</td>
+</tr>
+
+<tr>
+<td>CNAME</td>
+<td>Alias</td>
+</tr>
+
+<tr>
+<td>MX</td>
+<td>Email</td>
+</tr>
+
+<tr>
+<td>TXT</td>
+<td>Verification</td>
+</tr>
+
+</table>
+
+</div>
+
+`
+},
+
+/* SSL */
+
+{
+id:"ssl",
+title:"24. SSL/TLS & HTTPS",
+
+html:`
+
+<div class="hero">
+
+<h1>SSL / TLS</h1>
+
+<p>
+Secure application traffic using HTTPS.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>HTTP vs HTTPS</h2>
+
+<div class="grid">
+
+<div class="box">
+
+<b>HTTP</b>
+
+<p>
+Port 80
+</p>
+
+<p>
+Not encrypted by TLS.
+</p>
+
+</div>
+
+<div class="box">
+
+<b>HTTPS</b>
+
+<p>
+Port 443
+</p>
+
+<p>
+Uses TLS encryption.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>AWS Certificate Manager</h2>
+
+<ol>
+
+<li>Open Certificate Manager.</li>
+
+<li>Request certificate.</li>
+
+<li>Enter domain name.</li>
+
+<li>Select DNS validation or another supported validation method.</li>
+
+<li>Complete validation.</li>
+
+<li>Certificate becomes available when validation succeeds.</li>
+
+</ol>
+
+</div>
+
+<div class="card">
+
+<h2>HTTPS Load Balancer Flow</h2>
+
+<div class="command">
+Browser
+   ↓
+HTTPS :443
+   ↓
+Load Balancer
+   ↓
+TLS Certificate
+   ↓
+EC2
+</div>
+
+</div>
+
+<div class="warning">
+
+Never expose passwords, API keys or tokens through unencrypted
+HTTP in production.
+
+</div>
+
+`
+},
+
+/* LINUX */
+
+{
+id:"linux",
+title:"25. Linux Commands for AWS",
+
+html:`
+
+<div class="hero">
+
+<h1>Linux for AWS</h1>
+
+<p>
+Important commands used on EC2 servers.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Navigation</h2>
+
+<div class="command">
+pwd
+ls
+ls -la
+cd
+cd ..
+cd /
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Files</h2>
+
+<div class="command">
+touch file.txt
+
+mkdir folder
+
+cp file.txt folder/
+
+mv file.txt new.txt
+
+rm file.txt
+
+cat file.txt
+
+nano file.txt
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Permissions</h2>
+
+<div class="command">
+chmod 400 key.pem
+
+chmod +x script.sh
+
+chown user:user file.txt
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Processes</h2>
+
+<div class="command">
+ps aux
+
+top
+
+kill PID
+
+pkill process-name
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Services</h2>
+
+<div class="command">
+sudo systemctl status httpd
+
+sudo systemctl start httpd
+
+sudo systemctl stop httpd
+
+sudo systemctl restart httpd
+
+sudo systemctl enable httpd
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Logs</h2>
+
+<div class="command">
+journalctl
+
+journalctl -u httpd
+
+journalctl -f
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Storage</h2>
+
+<div class="command">
+df -h
+
+du -sh *
+
+lsblk
+
+mount
+
+umount
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Networking</h2>
+
+<div class="command">
+ip addr
+
+ip route
+
+curl
+
+wget
+
+ss -tulpn
+
+ping
+
+nslookup
+
+dig
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Amazon Linux Packages</h2>
+
+<div class="command">
+sudo dnf update -y
+
+sudo dnf install PACKAGE
+
+sudo dnf remove PACKAGE
+</div>
+
+</div>
+
+`
+},
+
+/* SPRING BOOT REAL PROJECT */
+
+{
+id:"springboot",
+title:"26. Deploy Spring Boot + RDS",
+
+html:`
+
+<div class="hero">
+
+<h1>Real Project: Spring Boot + EC2 + RDS</h1>
+
+<p>
+Deploy a Java application connected to MySQL RDS.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Architecture</h2>
+
+<div class="command">
+User
+ ↓
+Load Balancer
+ ↓
+EC2
+ ↓
+Spring Boot
+ ↓
+RDS MySQL
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 1 — Create RDS</h2>
+
+<p>
+
+Create the MySQL RDS database using the RDS instructions in
+this guide.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Step 2 — Configure Spring Boot</h2>
+
+<p>Example configuration:</p>
+
+<div class="command">
+spring.datasource.url=jdbc:mysql://DATABASE_ENDPOINT:3306/demo_db
+
+spring.datasource.username=admin
+
+spring.datasource.password=YOUR_PASSWORD
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+</div>
+
+<div class="warning">
+
+For production, don't hard-code passwords in application source
+or committed configuration files. Use a secure secret-management
+approach.
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 3 — Build Application</h2>
+
+<div class="command">
+mvn clean package
+</div>
+
+<p>
+
+This creates your JAR/WAR depending on the project configuration.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Step 4 — Copy JAR to EC2</h2>
+
+<div class="command">
+scp -i my-key.pem target/app.jar ec2-user@PUBLIC_IP:/home/ec2-user/
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 5 — Run Application</h2>
+
+<div class="command">
+java -jar app.jar
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 6 — Test</h2>
+
+<div class="command">
+curl http://localhost:8080
+</div>
+
+<p>
+
+If the application is configured for another port, use that port.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Step 7 — Security Group</h2>
+
+<p>
+
+If testing directly from the internet, the relevant application
+port must be allowed in the EC2 security group.
+
+For production, prefer:
+
+</p>
+
+<div class="command">
+Internet
+   ↓
+ALB :443
+   ↓
+EC2 application
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Step 8 — Run as Linux Service</h2>
+
+<p>Create a systemd service file.</p>
+
+<div class="command">
+sudo nano /etc/systemd/system/myapp.service
+</div>
+
+<p>Example:</p>
+
+<div class="command">
+[Unit]
+Description=My Spring Boot Application
+After=network.target
+
+[Service]
+User=ec2-user
+WorkingDirectory=/home/ec2-user
+ExecStart=/usr/bin/java -jar /home/ec2-user/app.jar
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+</div>
+
+<p>Then:</p>
+
+<div class="command">
+sudo systemctl daemon-reload
+
+sudo systemctl enable myapp
+
+sudo systemctl start myapp
+
+sudo systemctl status myapp
+</div>
+
+</div>
+
+<div class="success">
+
+Now your Java application can run automatically when the EC2
+server starts.
+
+</div>
+
+`
+},
+
+/* FINAL */
+
+{
+id:"final",
+title:"27. Complete AWS Project",
+
+html:`
+
+<div class="hero">
+
+<h1>Final Project</h1>
+
+<p>
+Build a production-style AWS architecture.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Architecture</h2>
+
+<div class="command">
+                         INTERNET
+                             |
+                             v
+                         Route 53
+                             |
+                             v
+                        CloudFront
+                             |
+                             v
+                  Application Load Balancer
+                             |
+                 +-----------+-----------+
+                 |                       |
+                 v                       v
+               EC2                     EC2
+                 |                       |
+                 +-----------+-----------+
+                             |
+                             v
+                         RDS MySQL
+                             |
+                             v
+                         Database
+
+
+                    S3
+                     |
+                     v
+              Images / Files
+
+
+                    IAM
+                     |
+                     v
+              Permissions
+
+
+               CloudWatch
+                     |
+                     v
+                Monitoring
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Final Checklist</h2>
+
+<ul class="checklist">
+
+<li><label><input type="checkbox"> IAM</label></li>
+
+<li><label><input type="checkbox"> AWS CLI</label></li>
+
+<li><label><input type="checkbox"> EC2</label></li>
+
+<li><label><input type="checkbox"> EBS</label></li>
+
+<li><label><input type="checkbox"> AMI</label></li>
+
+<li><label><input type="checkbox"> Load Balancer</label></li>
+
+<li><label><input type="checkbox"> Auto Scaling</label></li>
+
+<li><label><input type="checkbox"> S3</label></li>
+
+<li><label><input type="checkbox"> RDS</label></li>
+
+<li><label><input type="checkbox"> DynamoDB</label></li>
+
+<li><label><input type="checkbox"> Lambda</label></li>
+
+<li><label><input type="checkbox"> CloudFormation</label></li>
+
+<li><label><input type="checkbox"> Route 53</label></li>
+
+<li><label><input type="checkbox"> CloudFront</label></li>
+
+<li><label><input type="checkbox"> VPC</label></li>
+
+<li><label><input type="checkbox"> Billing</label></li>
+
+<li><label><input type="checkbox"> Organizations</label></li>
+
+<li><label><input type="checkbox"> Amplify</label></li>
+
+<li><label><input type="checkbox"> ECS</label></li>
+
+<li><label><input type="checkbox"> EKS</label></li>
+
+<li><label><input type="checkbox"> Terraform</label></li>
+
+<li><label><input type="checkbox"> DNS</label></li>
+
+<li><label><input type="checkbox"> SSL/TLS</label></li>
+
+<li><label><input type="checkbox"> Linux</label></li>
+
+<li><label><input type="checkbox"> Deploy Java application</label></li>
+
+<li><label><input type="checkbox"> Connect application to RDS</label></li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>What You Should Be Able To Do</h2>
+
+<ol>
+
+<li>Create an AWS account securely.</li>
+
+<li>Create IAM users and roles.</li>
+
+<li>Configure AWS CLI.</li>
+
+<li>Create EC2 servers.</li>
+
+<li>Connect to EC2 using SSH.</li>
+
+<li>Install Java/Linux packages.</li>
+
+<li>Deploy Spring Boot.</li>
+
+<li>Create EBS storage.</li>
+
+<li>Create AMI.</li>
+
+<li>Create Load Balancer.</li>
+
+<li>Create Auto Scaling.</li>
+
+<li>Create S3 bucket.</li>
+
+<li>Create RDS MySQL.</li>
+
+<li>Connect EC2 to RDS.</li>
+
+<li>Create VPC and subnets.</li>
+
+<li>Configure Route 53.</li>
+
+<li>Configure HTTPS.</li>
+
+<li>Use CloudFront.</li>
+
+<li>Deploy containers with ECS.</li>
+
+<li>Understand EKS.</li>
+
+<li>Use Terraform.</li>
+
+<li>Monitor AWS costs.</li>
+
+</ol>
+
+</div>
+
+<div class="success">
+
+🎉 Complete this project yourself instead of only reading the
+documentation. That practical experience is what will make the
+AWS concepts easier to remember.
+
+</div>
+
+`
+
+}
+
+];
+
+
+/* =========================================================
+APPLICATION
+========================================================= */
+
+let current=0;
+
+let completed=
+JSON.parse(
+localStorage.getItem("awsCompleted") || "{}"
+);
+
+
+/* RENDER SIDEBAR */
+
+function renderTopics(filter=""){
+
+const container=
+document.getElementById("topics");
+
+container.innerHTML="";
+
+data.forEach((item,index)=>{
+
+if(
+filter &&
+!item.title.toLowerCase()
+.includes(filter.toLowerCase())
+)return;
+
+const div=
+document.createElement("div");
+
+div.className="topic";
+
+if(index===current)
+div.classList.add("active");
+
+if(completed[item.id])
+div.classList.add("completed");
+
+div.textContent=item.title;
+
+div.onclick=()=>{
+
+current=index;
+
+render();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+};
+
+container.appendChild(div);
+
+});
+
+}
+
+
+/* RENDER PAGE */
+
+function render(){
+
+const item=data[current];
+
+document.getElementById("pageTitle")
+.textContent=item.title;
+
+document.getElementById("content")
+.innerHTML=`
+
+${item.html}
+
+<div class="navigation">
+
+<button
+class="btn"
+onclick="previous()"
+${current===0?"disabled":""}>
+← Previous
+</button>
+
+<button
+class="btn complete"
+onclick="complete()">
+✓ Mark Topic Complete
+</button>
+
+<button
+class="btn"
+onclick="next()"
+${current===data.length-1?"disabled":""}>
+Next →
+</button>
+
+</div>
+
+<footer style="
+text-align:center;
+padding:30px;
+color:#64748b;
+">
+Topic ${current+1} of ${data.length}
+</footer>
+`;
+
+renderTopics();
+
+updateProgress();
+
+restoreChecks();
+
+}
+
+
+/* NEXT */
+
+function next(){
+
+if(current<data.length-1){
+
+current++;
+
+render();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+}
+
+
+/* PREVIOUS */
+
+function previous(){
+
+if(current>0){
+
+current--;
+
+render();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+}
+
+
+/* COMPLETE */
+
+function complete(){
+
+completed[data[current].id]=true;
+
+localStorage.setItem(
+"awsCompleted",
+JSON.stringify(completed)
+);
+
+updateProgress();
+
+renderTopics();
+
+}
+
+
+/* PROGRESS */
+
+function updateProgress(){
+
+const total=data.length;
+
+const done=
+Object.keys(completed).length;
+
+const percent=
+Math.round((done/total)*100);
+
+document.getElementById("progressText")
+.textContent=percent+"%";
+
+document.getElementById("progressFill")
+.style.width=percent+"%";
+
+}
+
+
+/* SEARCH */
+
+function searchTopics(){
+
+const value=
+document.getElementById("search").value;
+
+renderTopics(value);
+
+}
+
+
+/* DARK MODE */
+
+function darkMode(){
+
+document.body.classList.toggle("dark");
+
+localStorage.setItem(
+"awsDarkMode",
+document.body.classList.contains("dark")
+);
+
+}
+
+
+/* CHECKLIST STORAGE */
+
+function restoreChecks(){
+
+const boxes=
+document.querySelectorAll(
+'.checklist input[type="checkbox"]'
+);
+
+boxes.forEach((box,index)=>{
+
+const key=
+"aws-check-"+
+current+
+"-"+
+index;
+
+box.checked=
+localStorage.getItem(key)==="true";
+
+box.addEventListener(
+"change",
+()=>{
+
+localStorage.setItem(
+key,
+box.checked
+);
+
+}
+);
+
+});
+
+}
+
+
+/* ACCORDION */
+
+document.addEventListener(
+"click",
+function(e){
+
+if(
+e.target.classList.contains("step-title")
+){
+
+const body=
+e.target.nextElementSibling;
+
+if(body){
+
+if(
+body.style.display==="none"
+){
+
+body.style.display="block";
+
+}else{
+
+body.style.display="none";
+
+}
+
+}
+
+}
+
+});
+
+
+/* KEYBOARD */
+
+document.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="ArrowRight")
+next();
+
+if(e.key==="ArrowLeft")
+previous();
+
+});
+
+
+/* RESTORE DARK MODE */
+
+if(
+localStorage.getItem("awsDarkMode")==="true"
+){
+
+document.body.classList.add("dark");
+
+}
+
+
+/* START */
+
+render();
+
+</script>
+
 </body>
 </html>
